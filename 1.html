@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI×PBL 历史桌游创作营｜课程介绍</title>
+  <style>
+    :root{
+      --bg1:#6f78f6;
+      --bg2:#5f64ea;
+      --card:#ffffff;
+      --text:#1f2330;
+      --muted:#61677a;
+
+      --pillBg:#f7efe5;
+      --pillBorder:#ead8c6;
+      --pillText:#7a4a1d;
+
+      --line:#ece7df;
+      --soft:#f6f3ee;
+
+      --btn:#8b4a18;
+      --btnShadow: rgba(139,74,24,.28);
+      --warnBg:#fff7e9;
+      --warnBorder:#f0d9b9;
+      --warnText:#5b4527;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      font-family:"Microsoft YaHei","PingFang SC",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{
+      width:min(1100px, 92vw);
+      margin:0 auto;
+      padding:26px 0 34px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:0 18px 45px rgba(0,0,0,.18);
+      padding:44px 56px;
+    }
+    @media (max-width:720px){
+      .card{padding:28px 18px}
+    }
+
+    .titleRow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+      text-align:center;
+    }
+    .pillIcon{
+      width:38px;height:38px;
+      border-radius:12px;
+      background:var(--pillBg);
+      border:1px solid var(--pillBorder);
+      display:grid;
+      place-items:center;
+      color:var(--pillText);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+      user-select:none;
+      font-size:20px;
+      line-height:1;
+    }
+    h1{
+      margin:0;
+      font-size:36px;
+      font-weight:1000;
+      letter-spacing:.02em;
+      word-break:break-word;
+    }
+    .sub{
+      margin:12px auto 0;
+      max-width:920px;
+      text-align:center;
+      line-height:1.9;
+      font-size:15.5px;
+      color:var(--muted);
+    }
+    .sub b{color:var(--text)}
+
+    .ctaRow{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin-top:22px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      padding:14px 34px;
+      border-radius:14px;
+      background:var(--btn);
+      color:#fff;
+      font-weight:900;
+      font-size:16px;
+      box-shadow:0 10px 24px var(--btnShadow);
+      transition: transform .08s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+      box-shadow:0 14px 30px rgba(139,74,24,.32);
+    }
+    .btn:active{
+      transform: translateY(0);
+      box-shadow:0 8px 18px rgba(139,74,24,.26);
+    }
+    .btnGhost{
+      background:#ffffff;
+      color:#2b2f3a;
+      border:1px solid rgba(0,0,0,.12);
+      box-shadow:none;
+    }
+    .btnGhost:hover{
+      transform: translateY(-1px);
+      filter:none;
+      box-shadow:0 10px 24px rgba(0,0,0,.10);
+    }
+
+    .grid3{
+      margin-top:26px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width:920px){
+      .grid3{grid-template-columns:1fr;gap:12px}
+    }
+    .tile{
+      background:var(--soft);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px 16px 14px;
+      text-align:left;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    .tileTop{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:6px;
+    }
+    .badge{
+      width:40px;height:40px;
+      border-radius:14px;
+      background:#111827;
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      opacity:.78;
+      font-size:18px;
+      flex:0 0 auto;
+    }
+    .tile h3{
+      margin:0;
+      font-size:16px;
+      font-weight:1000;
+      color:#2b2f3a;
+      letter-spacing:.02em;
+    }
+    .tile p{
+      margin:8px 0 0;
+      color:#2b2f3a;
+      line-height:1.75;
+      font-size:14.5px;
+    }
+
+    .section{
+      margin-top:18px;
+      border-top:1px solid rgba(0,0,0,.06);
+      padding-top:18px;
+    }
+    .sectionHead{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size:18px;
+      font-weight:1000;
+      letter-spacing:.02em;
+      color:#2b2f3a;
+    }
+    .miniHint{
+      color:var(--muted);
+      font-weight:800;
+      font-size:13.5px;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:920px){
+      .steps{grid-template-columns:1fr}
+    }
+    .step{
+      background:var(--soft);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 14px 12px;
+      text-align:left;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .num{
+      width:40px;height:40px;
+      border-radius:14px;
+      background:#111827;
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      opacity:.78;
+      flex:0 0 auto;
+    }
+    .stepTitle{
+      margin:0;
+      font-size:15.5px;
+      font-weight:1000;
+      color:#2b2f3a;
+    }
+    .stepDesc{
+      margin:6px 0 0;
+      color:#2b2f3a;
+      line-height:1.75;
+      font-size:14.2px;
+    }
+
+    .note{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:14px;
+      background:var(--warnBg);
+      border:1px solid var(--warnBorder);
+      color:var(--warnText);
+      line-height:1.85;
+      font-weight:800;
+      text-align:center;
+    }
+
+    .bullets{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width:920px){
+      .bullets{grid-template-columns:1fr}
+    }
+    .bulletBox{
+      background:#fff;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      padding:14px 14px 12px;
+      text-align:left;
+    }
+    .bulletBox h4{
+      margin:0;
+      font-size:15px;
+      font-weight:1000;
+      color:#2b2f3a;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    ul{
+      margin:10px 0 0;
+      padding:0 0 0 18px;
+      color:#2b2f3a;
+      line-height:1.75;
+      font-size:14.2px;
+    }
+
+    .faq{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
+    }
+    details{
+      background:var(--soft);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:1000;
+      color:#2b2f3a;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color:#2b2f3a;
+      line-height:1.75;
+      font-size:14.2px;
+    }
+
+    .footerCta{
+      margin-top:18px;
+      display:flex;
+      justify-content:center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <main class="card">
+      <!-- 顶部：课程名 -->
+      <div class="titleRow">
+        <div class="pillIcon">🎲</div>
+        <h1>AI×PBL 历史桌游创作营</h1>
+        <div class="pillIcon">🎲</div>
+      </div>
+      <div class="sub">
+        我们<b>不是上课</b>，而是一起完成一个项目：把一段历史中的“冲突与选择”做成<b>真正能玩</b>的桌游作品。<br/>
+        你将经历：选题 → 规则机制 → 素材制作 → 试玩复盘 → 迭代优化 → 作品展示。
+      </div>
+
+      <div class="ctaRow">
+        <button class="btn" onclick="scrollToId('signup')">开启项目挑战</button>
+        <button class="btn btnGhost" onclick="scrollToId('flow')">先看项目流程</button>
+      </div>
+
+      <!-- 三个卖点 -->
+      <section class="grid3" aria-label="课程亮点">
+        <div class="tile">
+          <div class="tileTop">
+            <div class="badge">🎨</div>
+            <h3>有趣：像做游戏一样学历史</h3>
+          </div>
+          <p>用“规则和选择”理解历史，不背结论，靠体验建立认知。</p>
+        </div>
+
+        <div class="tile">
+          <div class="tileTop">
+            <div class="badge">💡</div>
+            <h3>有料：把思辨做成机制</h3>
+          </div>
+          <p>每一次选择都要有代价与后果，让历史冲突在桌面上“跑起来”。</p>
+        </div>
+
+        <div class="tile">
+          <div class="tileTop">
+            <div class="badge">🏆</div>
+            <h3>有作品：完成可展示成品</h3>
+          </div>
+          <p>最终输出：一套可试玩的桌游（规则书 + 卡牌/地图/角色 + 作品介绍）。</p>
+        </div>
+      </section>
+
+      <!-- 项目流程 -->
+      <section class="section" id="flow">
+        <div class="sectionHead">
+          <div class="pillIcon">🌱</div>
+          <h2>项目流程图</h2>
+          <div class="miniHint">（从灵感到成品）</div>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <div>
+              <p class="stepTitle">选题与驱动问题</p>
+              <p class="stepDesc">选一个历史冲突/选择，用一句话说清：为什么值得做成游戏？</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">2</div>
+            <div>
+              <p class="stepTitle">机制与规则原型</p>
+              <p class="stepDesc">设计资源、行动、代价、胜利条件；先做最小可玩版本。</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">3</div>
+            <div>
+              <p class="stepTitle">素材制作与故事包装</p>
+              <p class="stepDesc">用 AI 生成事件卡/角色卡/地图与文案，让体验更清晰、更沉浸。</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">4</div>
+            <div>
+              <p class="stepTitle">试玩复盘与迭代优化</p>
+              <p class="stepDesc">测试平衡与乐趣：哪里卡、哪里无聊、哪里太强；改一版再玩一轮。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          核心原则：先做“可玩的最小版本”，再通过试玩复盘不断升级。
+        </div>
+      </section>
+
+      <!-- 你会收获什么 -->
+      <section class="section" id="gain">
+        <div class="sectionHead">
+          <div class="pillIcon">🌟</div>
+          <h2>你会收获什么</h2>
+          <div class="miniHint">（作品 + 能力）</div>
+        </div>
+
+        <div class="bullets">
+          <div class="bulletBox">
+            <h4>📦 最终作品交付</h4>
+            <ul>
+              <li>一套可试玩桌游（核心规则 + 组件）</li>
+              <li>作品介绍页（主题、机制、亮点、玩法）</li>
+              <li>试玩记录与迭代说明（你怎么改得更好玩）</li>
+            </ul>
+          </div>
+
+          <div class="bulletBox">
+            <h4>🧠 可迁移的核心能力</h4>
+            <ul>
+              <li>把“历史信息”变成“可讨论的问题”</li>
+              <li>用机制表达观点：资源、限制、代价、后果</li>
+              <li>团队协作：分工、沟通、整合与表达</li>
+              <li>复盘迭代：发现问题、提出假设、快速试错</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 适合谁 -->
+      <section class="section" id="who">
+        <div class="sectionHead">
+          <div class="pillIcon">🧭</div>
+          <h2>适合谁参加</h2>
+          <div class="miniHint">（不用担心“不会”）</div>
+        </div>
+
+        <div class="bullets">
+          <div class="bulletBox">
+            <h4>👦👧 学生画像</h4>
+            <ul>
+              <li>喜欢游戏、故事、历史、策略或创作</li>
+              <li>想做出一个“拿得出手”的作品</li>
+              <li>愿意参与讨论，敢于表达与尝试</li>
+            </ul>
+          </div>
+
+          <div class="bulletBox">
+            <h4>✅ 不需要具备</h4>
+            <ul>
+              <li>不需要很强的历史基础（我们会提供素材与引导）</li>
+              <li>不需要会写代码（AI 可辅助生成，重点是设计）</li>
+              <li>不需要一开始就想得很完美（先做出来再迭代）</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 课堂形式 -->
+      <section class="section" id="format">
+        <div class="sectionHead">
+          <div class="pillIcon">🧩</div>
+          <h2>课堂形式</h2>
+          <div class="miniHint">（节奏清晰，持续推进）</div>
+        </div>
+
+        <div class="bullets">
+          <div class="bulletBox">
+            <h4>⏱️ 典型一节课怎么过</h4>
+            <ul>
+              <li>快速回顾：上节课做到哪里</li>
+              <li>任务发布：本节课要完成什么产出</li>
+              <li>团队创作：AI 辅助 + 讨论决策 + 制作</li>
+              <li>展示互评：说清选择与理由</li>
+              <li>复盘迭代：下一步怎么改更好玩</li>
+            </ul>
+          </div>
+
+          <div class="bulletBox">
+            <h4>🤖 AI 在课程中的作用</h4>
+            <ul>
+              <li>生成素材：事件卡、角色设定、背景文案</li>
+              <li>辅助规则：平衡建议、机制优化思路</li>
+              <li>快速原型：把想法变成可试玩版本（可选网页试玩）</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 常见问题 -->
+      <section class="section" id="faq">
+        <div class="sectionHead">
+          <div class="pillIcon">❓</div>
+          <h2>常见问题</h2>
+          <div class="miniHint">（家长/学生都适用）</div>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>如果孩子不懂“历史冲突”，怎么办？</summary>
+            <p>我们会把它翻译成孩子听得懂的语言：两种都合理但不能同时选的“难选题”。并用游戏机制（资源有限、选择有代价）让他们在体验中理解。</p>
+          </details>
+
+          <details>
+            <summary>孩子做不出完整作品会不会挫败？</summary>
+            <p>我们用“最小可玩版本”策略：先做能跑起来的一小版，再逐步加内容。每节课都有清晰产出点，保证持续推进与可见进步。</p>
+          </details>
+
+          <details>
+            <summary>会不会变成“玩闹”，学不到东西？</summary>
+            <p>不会。我们把“玩”变成结构化任务：提出问题—做出选择—解释理由—承担后果—复盘迭代。学习发生在规则背后的思考与表达里。</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- 报名/引导 -->
+      <section class="section" id="signup">
+        <div class="sectionHead">
+          <div class="pillIcon">☀️</div>
+          <h2>准备好了吗？</h2>
+          <div class="miniHint">（带着期待开启挑战）</div>
+        </div>
+
+        <div class="note">
+          这不是一门“听完就结束”的课，而是一段“做完就拥有”的创作旅程。
+        </div>
+
+        <div class="footerCta">
+          <button class="btn" onclick="openDialog()">开启正式挑战</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    function openDialog(){
+      alert("开启正式挑战：\n1）选一个你最想做成游戏的历史冲突\n2）用一句话写出驱动问题\n3）开始搭建最小可玩版本！");
+    }
+  </script>
+</body>
+</html>
