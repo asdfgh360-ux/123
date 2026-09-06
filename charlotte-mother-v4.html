@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>《夏洛的网》｜AI整本书阅读母版 V4</title>
+<meta name="description" content="《夏洛的网》AI整本书阅读母版：认识这本书、整本书地图、思维模型、思维与讨论、阅读作品。" />
+<script src="https://js.puter.com/v2/"></script>
+<link rel="stylesheet" href="https://raw.githack.com/asdfgh360-ux/123/2d3ae3eff944a0b5eecb20ecda3f4bc737e75be8/style.css">
+<link rel="stylesheet" href="https://raw.githack.com/asdfgh360-ux/123/2d3ae3eff944a0b5eecb20ecda3f4bc737e75be8/mother.css">
+<style>
+.generatedModelFrame{margin-top:16px;border:1px solid #e7e8f5;border-radius:20px;overflow:hidden;background:#fff;padding:10px;box-shadow:0 8px 30px rgba(61,57,120,.06)}
+.generatedModelFrame img{display:block;width:100%;height:auto;border-radius:14px;background:#fafaff;min-height:180px;object-fit:contain}
+.singleExplain{margin:12px 0 0;grid-template-columns:1fr!important}.singleExplain>div{background:#f7f8ff!important;border:1px solid #e2e5f6!important}.singleExplain b{font-size:16px!important;color:#5146d9}.singleExplain span{margin-top:7px!important;display:block!important;line-height:1.75!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand"><span class="logo">阅</span><span>AI阅读精读助手</span></div><div class="tag">《夏洛的网》最终母版 · V4</div></div>
+
+  <section id="home" class="hero">
+    <div class="eyebrow">✦ AI不替你读，AI陪你想</div>
+    <h1>《夏洛的网》<br><span class="grad">整本书精读母版</span></h1>
+    <p>这版专门用于确认最终阅读体验：作者、整本书结构、思维模型、思维与讨论，以及最后的阅读作品。</p>
+    <button class="primary" id="demoBtn" style="height:56px;padding:0 32px">直接进入《夏洛的网》 →</button>
+    <form id="bookForm" style="display:none"><input id="bookInput" value="夏洛的网"><button id="startBtn">开始</button></form>
+    <div id="chips" style="display:none"></div><div id="homeError" class="error"></div>
+  </section>
+
+  <section id="workspace" class="workspace">
+    <div class="bookhead">
+      <div class="booktitle"><div style="opacity:.72;font-size:13px">我的整本书阅读</div><h2 id="bookTitle">—</h2><div class="bookmeta"><span class="pill" id="authorPill">作者：—</span><span class="pill" id="genrePill">体裁：—</span><span class="pill" id="difficultyPill">难度：—</span><span class="pill" id="confidencePill">识别：—</span></div></div>
+      <div class="headright"><label>阅读年级 <select id="gradeSelect"><option value="1">1年级</option><option value="2">2年级</option><option value="3">3年级</option><option value="4">4年级</option><option value="5">5年级</option><option value="6">6年级</option></select></label><button class="ghostLight" id="restartBtn">返回封面</button></div>
+    </div>
+    <div class="layout">
+      <main class="main">
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-tab="intro">① 认识这本书</button>
+          <button class="tab" data-tab="map">② 整本书地图</button>
+          <button class="tab" data-tab="tools">③ 思维模型</button>
+          <button class="tab" data-tab="discuss">④ 思维与讨论</button>
+          <button class="tab" data-tab="project">⑤ 做个阅读作品</button>
+        </div>
+        <section class="panel active" id="panel-intro"></section>
+        <section class="panel" id="panel-map"></section>
+        <section class="panel" id="panel-tools"></section>
+        <section class="panel" id="panel-discuss"></section>
+        <section class="panel" id="panel-project"></section>
+      </main>
+      <aside class="chat">
+        <div class="chatHead"><div class="avatar">🤖</div><div><b>AI阅读导师</b><span>关于这本书，什么都可以聊</span></div></div>
+        <div class="messages" id="messages"></div>
+        <form class="chatForm" id="chatForm"><textarea id="chatInput" placeholder="把你的问题或想法告诉我…"></textarea><button class="send">➤</button></form>
+      </aside>
+    </div>
+  </section>
+
+  <section class="card" id="libraryInfo" style="display:none"><div class="booklist" id="booklist"></div></section>
+  <div class="footer">当前页面只用于确认《夏洛的网》母版内容与交互。正式版AI将改用国内模型，并加入手机号/微信登录与管理后台。</div>
+</div>
+
+<div class="loading" id="loading"><div class="loaderCard"><div class="spinner"></div><b id="loadingText">正在打开阅读母版…</b><div class="notice">AI不替你读，AI陪你想。</div></div></div>
+
+<script src="https://raw.githack.com/asdfgh360-ux/123/2d3ae3eff944a0b5eecb20ecda3f4bc737e75be8/data.js"></script>
+<script src="https://raw.githack.com/asdfgh360-ux/123/2d3ae3eff944a0b5eecb20ecda3f4bc737e75be8/app-core.js"></script>
+<script src="https://raw.githack.com/asdfgh360-ux/123/2d3ae3eff944a0b5eecb20ecda3f4bc737e75be8/app-ui.js"></script>
+<script src="https://raw.githack.com/asdfgh360-ux/123/76f7c7c877a83164871434d7e732db309cecfedc/mother-v3.js"></script>
+<script>
+function replaceLegacyThinkingMapText(){
+  const root=document.getElementById('workspace');
+  if(!root)return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  const nodes=[];
+  while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(n=>{if(n.nodeValue&&n.nodeValue.includes('AI思维地图'))n.nodeValue=n.nodeValue.replaceAll('AI思维地图','思维模型')});
+}
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const p=demoCharlotte();
+    state={plan:p,grade:3,toolAnswers:{},chat:[],thoughtReflection:{},discussionDone:{}};
+    openWorkspace();
+    replaceLegacyThinkingMapText();
+    new MutationObserver(replaceLegacyThinkingMapText).observe(document.getElementById('workspace'),{subtree:true,childList:true,characterData:true});
+  },100);
+});
+</script>
+</body>
+</html>
