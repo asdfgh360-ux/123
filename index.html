@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI阅读精读助手｜整本书·思维工具·PBL</title>
+<meta name="description" content="面向小学1-6年级的AI整本书阅读助手。不是摘好词好句，而是用思维工具读懂一本书。" />
+<script src="https://js.puter.com/v2/"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand"><span class="logo">阅</span><span>AI阅读精读助手</span></div><div class="tag">1–6年级 · PBL整本书阅读</div></div>
+  <section id="home" class="hero">
+    <div class="eyebrow">✦ AI不替你读，AI陪你想</div>
+    <h1>不是摘“好词好句”，<br><span class="grad">而是学会读懂一本书</span></h1>
+    <p>输入书名，AI会为你搭建整本书阅读地图，挑选最合适的1–2个思维工具，并带你完成一个真正的阅读项目。</p>
+    <form class="searchBox" id="bookForm"><input id="bookInput" autocomplete="off" placeholder="输入一本书，例如《夏洛的网》" /><button class="primary" id="startBtn">开始精读 →</button></form>
+    <div class="chips" id="chips"></div>
+    <button class="demo" id="demoBtn">▶ 直播演示：直接打开《夏洛的网》</button>
+    <div id="homeError" class="error"></div>
+    <div class="proof">
+      <div><b>🧭 整本书地图</b><span>先看全局，再进入章节与关键转折，不把阅读切碎成题目。</span></div>
+      <div><b>🧠 思维工具</b><span>时间线、故事山、双重气泡图、人物关系图、SWOT、逻辑树等。</span></div>
+      <div><b>🛠 PBL阅读项目</b><span>最后不是写模板书评，而是做一次听证会、博物馆、行动方案或解释产品。</span></div>
+    </div>
+  </section>
+
+  <section id="workspace" class="workspace">
+    <div class="bookhead">
+      <div class="booktitle"><div style="opacity:.72;font-size:13px">我的整本书阅读项目</div><h2 id="bookTitle">—</h2><div class="bookmeta"><span class="pill" id="authorPill">作者：—</span><span class="pill" id="genrePill">体裁：—</span><span class="pill" id="difficultyPill">难度：—</span><span class="pill" id="confidencePill">识别：—</span></div></div>
+      <div class="headright"><label>阅读年级 <select id="gradeSelect"><option value="1">1年级</option><option value="2">2年级</option><option value="3">3年级</option><option value="4">4年级</option><option value="5">5年级</option><option value="6">6年级</option></select></label><button class="ghostLight" id="restartBtn">换一本书</button></div>
+    </div>
+    <div class="layout">
+      <main class="main">
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-tab="intro">① 认识这本书</button><button class="tab" data-tab="map">② 整本书地图</button><button class="tab" data-tab="tools">③ 思维工具</button><button class="tab" data-tab="discuss">④ 深度讨论</button><button class="tab" data-tab="project">⑤ 我的阅读项目</button>
+        </div>
+        <section class="panel active" id="panel-intro"></section><section class="panel" id="panel-map"></section><section class="panel" id="panel-tools"></section><section class="panel" id="panel-discuss"></section><section class="panel" id="panel-project"></section>
+      </main>
+      <aside class="chat"><div class="chatHead"><div class="avatar">🤖</div><div><b>AI阅读导师</b><span>不直接给答案，只陪你想深一点</span></div></div><div class="messages" id="messages"></div><form class="chatForm" id="chatForm"><textarea id="chatInput" placeholder="把你的发现告诉我…"></textarea><button class="send">➤</button></form></aside>
+    </div>
+  </section>
+
+  <section class="card" id="libraryInfo"><h3>书目从哪里来？</h3><p class="muted">初始书库参考统编语文“快乐读书吧”和常见小学推荐阅读书目整理，不把它说成全国统一官方必读。书名不在书库里也能继续用，AI会进入通用精读模式。</p><div class="booklist" id="booklist"></div></section>
+  <div class="footer">不收集孩子真实姓名、手机号等个人信息。首次调用AI时，网页所使用的AI服务可能出现一次授权提示。</div>
+</div>
+
+<div class="loading" id="loading"><div class="loaderCard"><div class="spinner"></div><b id="loadingText">正在为你搭建这本书的阅读地图…</b><div class="notice">先找结构，再选思维工具，不急着找“标准答案”。</div></div></div>
+
+<script src="data.js"></script>
+<script src="app-core.js"></script>
+<script src="app-ui.js"></script>
+
+</body>
+</html>
